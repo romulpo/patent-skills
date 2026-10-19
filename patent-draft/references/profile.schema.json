@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:patent-draft:profile-schema:v1",
+  "$id": "urn:patent-draft:profile-schema:v2",
   "title": "Patent drafting profile",
   "type": "object",
   "additionalProperties": false,
@@ -15,11 +15,13 @@
     "filing_contexts",
     "profile_reference",
     "common_references",
+    "jurisdiction_references",
     "templates",
+    "mode_templates",
     "foundation_status"
   ],
   "properties": {
-    "schema_version": {"const": 1},
+    "schema_version": {"const": 2},
     "profile_id": {"enum": ["us-utility", "ru-invention", "ru-utility-model"]},
     "jurisdiction": {"enum": ["us", "ru"]},
     "application_kind": {"enum": ["utility", "invention", "utility_model"]},
@@ -49,11 +51,37 @@
       "uniqueItems": true,
       "items": {"type": "string", "minLength": 1}
     },
+    "jurisdiction_references": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
     "templates": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
       "items": {"type": "string", "minLength": 1}
+    },
+    "mode_templates": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "new_draft": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "revise": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "translate_adapt": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
     },
     "foundation_status": {"enum": ["foundation_only", "drafting_ready"]}
   }

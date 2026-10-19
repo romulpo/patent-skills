@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "profile_id": "ru-invention",
   "jurisdiction": "ru",
   "application_kind": "invention",
@@ -14,6 +14,14 @@
     "references/common/claim-first-method.md",
     "references/common/deliverable-contract.md"
   ],
+  "jurisdiction_references": [
+    "references/ru/source-manifest.md",
+    "references/ru/authority-and-verification.md",
+    "references/ru/core-drafting.md",
+    "references/ru/invention-drafting.md",
+    "references/ru/terminology.md",
+    "references/ru/translation-review.md"
+  ],
   "templates": [
     "assets/intake-common.yaml",
     "assets/evidence-inventory.yaml",
@@ -22,7 +30,16 @@
     "assets/templates/support-map.md",
     "assets/templates/terminology-map.md",
     "assets/templates/drawings-brief.md",
-    "assets/templates/unresolved-decisions.md"
+    "assets/templates/unresolved-decisions.md",
+    "assets/templates/ru-invention-description.md",
+    "assets/templates/ru-invention-claims.md",
+    "assets/templates/ru-abstract.md",
+    "assets/templates/ru-rule-check.md"
   ],
-  "foundation_status": "foundation_only"
+  "mode_templates": {
+    "translate_adapt": [
+      "assets/templates/ru-translation-review.md"
+    ]
+  },
+  "foundation_status": "drafting_ready"
 }

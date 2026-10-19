@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "profile_id": "us-utility",
+  "jurisdiction": "us",
+  "application_kind": "utility",
+  "default_language": "en",
+  "allowed_languages": ["en"],
+  "drafting_modes": ["new_draft", "revise"],
+  "filing_contexts": ["pre_filing", "filed_pending"],
+  "profile_reference": "references/profiles/us-utility.md",
+  "common_references": [
+    "references/common/drafting-workflow.md",
+    "references/common/evidence-and-no-fabrication.md",
+    "references/common/claim-first-method.md",
+    "references/common/deliverable-contract.md"
+  ],
+  "templates": [
+    "assets/intake-common.yaml",
+    "assets/evidence-inventory.yaml",
+    "assets/templates/invention-thesis.md",
+    "assets/templates/claim-plan.md",
+    "assets/templates/support-map.md",
+    "assets/templates/terminology-map.md",
+    "assets/templates/drawings-brief.md",
+    "assets/templates/unresolved-decisions.md"
+  ],
+  "foundation_status": "foundation_only"
+}

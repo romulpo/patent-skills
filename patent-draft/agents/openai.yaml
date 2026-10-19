@@ -1,0 +1,4 @@
+interface:
+  display_name: "Patent Draft"
+  short_description: "Draft supported U.S. and Russian patent applications"
+  default_prompt: "Use $patent-draft to turn my invention disclosure into a supported patent application draft."

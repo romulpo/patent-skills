@@ -1,0 +1,49 @@
+# Patent drafting intake. Leave unknown values null; do not guess.
+
+case_name: null
+profile_id: null
+drafting_mode: null              # new_draft | revise | translate_adapt
+document_language: null          # en | ru
+filing_context: null             # pre_filing | filed_pending
+technology: null                 # general | software_ai | mechanical | electrical | other
+
+source_documents: []
+translation:
+  source_language: null
+  target_language: null
+  source_application: null
+  existing_target_draft: null
+
+inventors:
+  - name: null
+    confirmed: false
+    contribution: null
+
+technical_problem: null
+known_approaches:
+  - source: null
+    relevant_features: null
+    concrete_limitation: null
+
+technical_results: []
+inventive_mechanism: null
+feature_to_result_causal_chain: null
+
+implemented_or_tested_embodiments: []
+contemplated_embodiments: []
+supported_alternatives: []
+indispensable_features: []
+optional_features: []
+
+actors_and_system_boundaries: []
+data_or_material_flows: []
+control_locations: []
+
+drawings_and_diagrams: []
+measurements_and_test_results: []
+known_competitor_substitutes: []
+commercial_scope_priorities: []
+
+existing_application_or_draft: null
+as_filed_documents: []
+unresolved_questions: []

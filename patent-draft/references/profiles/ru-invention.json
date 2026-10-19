@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "profile_id": "ru-invention",
+  "jurisdiction": "ru",
+  "application_kind": "invention",
+  "default_language": "ru",
+  "allowed_languages": ["ru"],
+  "drafting_modes": ["new_draft", "revise", "translate_adapt"],
+  "filing_contexts": ["pre_filing", "filed_pending"],
+  "profile_reference": "references/profiles/ru-invention.md",
+  "common_references": [
+    "references/common/drafting-workflow.md",
+    "references/common/evidence-and-no-fabrication.md",
+    "references/common/claim-first-method.md",
+    "references/common/deliverable-contract.md"
+  ],
+  "templates": [
+    "assets/intake-common.yaml",
+    "assets/evidence-inventory.yaml",
+    "assets/templates/invention-thesis.md",
+    "assets/templates/claim-plan.md",
+    "assets/templates/support-map.md",
+    "assets/templates/terminology-map.md",
+    "assets/templates/drawings-brief.md",
+    "assets/templates/unresolved-decisions.md"
+  ],
+  "foundation_status": "foundation_only"
+}

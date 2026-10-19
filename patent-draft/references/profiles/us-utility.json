@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "profile_id": "us-utility",
   "jurisdiction": "us",
   "application_kind": "utility",
@@ -14,6 +14,7 @@
     "references/common/claim-first-method.md",
     "references/common/deliverable-contract.md"
   ],
+  "jurisdiction_references": [],
   "templates": [
     "assets/intake-common.yaml",
     "assets/evidence-inventory.yaml",
@@ -24,5 +25,6 @@
     "assets/templates/drawings-brief.md",
     "assets/templates/unresolved-decisions.md"
   ],
+  "mode_templates": {},
   "foundation_status": "foundation_only"
 }

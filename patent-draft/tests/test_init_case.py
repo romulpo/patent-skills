@@ -17,12 +17,22 @@ SPEC.loader.exec_module(init_case)
 
 class InitCaseTests(unittest.TestCase):
     def test_all_profiles_resolve_references_and_templates(self):
+        expected_status = {
+            "us-utility": "foundation_only",
+            "ru-invention": "drafting_ready",
+            "ru-utility-model": "drafting_ready",
+        }
         for profile_id in init_case.PROFILE_IDS:
             with self.subTest(profile_id=profile_id):
                 profile, profile_path = init_case.load_profile(profile_id)
                 self.assertTrue(profile_path.is_file())
                 self.assertEqual(profile_id, profile["profile_id"])
-                self.assertEqual("foundation_only", profile["foundation_status"])
+                self.assertEqual(
+                    init_case.PROFILE_SCHEMA_VERSION, profile["schema_version"]
+                )
+                self.assertEqual(
+                    expected_status[profile_id], profile["foundation_status"]
+                )
 
     def test_initializes_each_profile(self):
         selections = {
@@ -57,8 +67,47 @@ class InitCaseTests(unittest.TestCase):
                     self.assertTrue((output / "working" / "invention-thesis.md").is_file())
                     self.assertTrue((output / "working" / "claim-plan.md").is_file())
                     self.assertTrue((output / "working" / "support-map.md").is_file())
+                    self.assertEqual(
+                        init_case.PROFILE_SCHEMA_VERSION,
+                        manifest["profile_schema_version"],
+                    )
+                    self.assertTrue(manifest["reference_files"])
+                    self.assertTrue(
+                        all(entry["sha256"] for entry in manifest["reference_files"])
+                    )
                     self.assertTrue((output / "evidence").is_dir())
                     self.assertTrue((output / "deliverables").is_dir())
+
+                    if profile_id == "ru-invention":
+                        self.assertTrue(
+                            (output / "working" / "ru-invention-description.md").is_file()
+                        )
+                        self.assertTrue(
+                            (output / "working" / "ru-invention-claims.md").is_file()
+                        )
+                        self.assertTrue(
+                            (output / "working" / "ru-translation-review.md").is_file()
+                        )
+                        self.assertTrue(
+                            (output / "working" / "ru-rule-check.md").is_file()
+                        )
+                    if profile_id == "ru-utility-model":
+                        self.assertTrue(
+                            (
+                                output
+                                / "working"
+                                / "ru-utility-model-description.md"
+                            ).is_file()
+                        )
+                        self.assertTrue(
+                            (output / "working" / "ru-utility-model-claims.md").is_file()
+                        )
+                        self.assertFalse(
+                            (output / "working" / "ru-translation-review.md").exists()
+                        )
+                        self.assertTrue(
+                            (output / "working" / "ru-rule-check.md").is_file()
+                        )
 
     def test_rejects_incompatible_selection(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -121,6 +170,38 @@ class InitCaseTests(unittest.TestCase):
                             output=Path(temp) / f"case-{index}",
                             sources=[],
                         )
+
+    def test_mode_specific_templates_are_isolated(self):
+        with tempfile.TemporaryDirectory() as temp:
+            temp_path = Path(temp)
+            source = temp_path / "source.txt"
+            source.write_text("source disclosure\n", encoding="utf-8")
+
+            translated = temp_path / "translated"
+            init_case.initialize_case(
+                profile_id="ru-utility-model",
+                mode="translate_adapt",
+                language="ru",
+                filing_context="pre_filing",
+                output=translated,
+                sources=[str(source)],
+            )
+            self.assertTrue(
+                (translated / "working" / "ru-translation-review.md").is_file()
+            )
+
+            new_draft = temp_path / "new-draft"
+            init_case.initialize_case(
+                profile_id="ru-utility-model",
+                mode="new_draft",
+                language="ru",
+                filing_context="pre_filing",
+                output=new_draft,
+                sources=[str(source)],
+            )
+            self.assertFalse(
+                (new_draft / "working" / "ru-translation-review.md").exists()
+            )
 
 
 if __name__ == "__main__":

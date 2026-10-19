@@ -30,6 +30,11 @@ Then read only the selected profile:
 - [references/profiles/ru-invention.md](references/profiles/ru-invention.md)
 - [references/profiles/ru-utility-model.md](references/profiles/ru-utility-model.md)
 
+For either Russian profile, use only the RU references routed by that profile.
+Treat their authority labels as part of the rule: a local drafting or translation
+convention is not a statement of law. Before any filing-facing handoff, confirm the
+current official text as required by the RU source manifest; this skill does not file.
+
 ## Initialize the case
 
 Run:
@@ -42,7 +47,8 @@ python scripts/init_case.py --profile PROFILE --mode MODE \
 
 Allowed modes are `new_draft`, `revise`, and `translate_adapt`. Allowed filing
 contexts are `pre_filing` and `filed_pending`. The initializer records hashes and
-creates the working artifacts; it does not modify or copy the source files.
+creates profile- and mode-specific working artifacts; it does not modify or copy the
+source files.
 
 ## Non-negotiable drafting invariants
 

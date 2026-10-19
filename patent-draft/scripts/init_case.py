@@ -26,6 +26,7 @@ PROFILE_IDS = tuple(PROFILE_IDENTITIES)
 MODES = ("new_draft", "revise", "translate_adapt")
 FILING_CONTEXTS = ("pre_filing", "filed_pending")
 LANGUAGES = ("en", "ru")
+PROFILE_SCHEMA_VERSION = 2
 FOUNDATION_STATUSES = ("foundation_only", "drafting_ready")
 
 REQUIRED_PROFILE_KEYS = {
@@ -39,7 +40,9 @@ REQUIRED_PROFILE_KEYS = {
     "filing_contexts",
     "profile_reference",
     "common_references",
+    "jurisdiction_references",
     "templates",
+    "mode_templates",
     "foundation_status",
 }
 
@@ -82,7 +85,7 @@ def load_profile(profile_id: str) -> tuple[dict, Path]:
         raise CaseInitError(
             f"invalid profile keys for {profile_id}: missing={missing}, extra={extra}"
         )
-    if profile["schema_version"] != 1:
+    if profile["schema_version"] != PROFILE_SCHEMA_VERSION:
         raise CaseInitError(f"unsupported profile schema: {profile['schema_version']}")
     if profile["profile_id"] != profile_id:
         raise CaseInitError(
@@ -122,11 +125,11 @@ def load_profile(profile_id: str) -> tuple[dict, Path]:
             f"{profile['foundation_status']!r}"
         )
 
-    for key in ("common_references", "templates"):
+    for key in ("common_references", "jurisdiction_references", "templates"):
         values = profile[key]
         if (
             not isinstance(values, list)
-            or not values
+            or (key != "jurisdiction_references" and not values)
             or len(values) != len(set(values))
             or not all(isinstance(value, str) and value for value in values)
         ):
@@ -137,10 +140,29 @@ def load_profile(profile_id: str) -> tuple[dict, Path]:
     ):
         raise CaseInitError(f"profile {profile_id} has invalid profile_reference")
 
+    mode_templates = profile["mode_templates"]
+    if not isinstance(mode_templates, dict) or not set(mode_templates).issubset(
+        profile["drafting_modes"]
+    ):
+        raise CaseInitError(
+            f"profile {profile_id} has invalid mode_templates: {mode_templates!r}"
+        )
+    for mode, values in mode_templates.items():
+        if (
+            not isinstance(values, list)
+            or len(values) != len(set(values))
+            or not all(isinstance(value, str) and value for value in values)
+        ):
+            raise CaseInitError(
+                f"profile {profile_id} has invalid templates for mode {mode}: {values!r}"
+            )
+
     referenced = [
         profile["profile_reference"],
         *profile["common_references"],
+        *profile["jurisdiction_references"],
         *profile["templates"],
+        *(value for values in mode_templates.values() for value in values),
     ]
     missing_paths = [
         value for value in referenced if not relative_skill_path(value).is_file()
@@ -150,6 +172,18 @@ def load_profile(profile_id: str) -> tuple[dict, Path]:
             f"profile {profile_id} references missing files: {', '.join(missing_paths)}"
         )
     return profile, path
+
+
+def selected_templates(profile: dict, mode: str) -> list[str]:
+    """Return common and mode-specific templates with safe target names."""
+    values = [*profile["templates"], *profile["mode_templates"].get(mode, [])]
+    target_names: set[str] = set()
+    for value in values:
+        name = relative_skill_path(value).name
+        if name in target_names:
+            raise CaseInitError(f"template target name is duplicated: {name}")
+        target_names.add(name)
+    return values
 
 
 def validate_selection(profile: dict, mode: str, language: str, filing_context: str) -> None:
@@ -212,7 +246,7 @@ def initialize_case(
         (output / "working").mkdir()
         (output / "deliverables").mkdir()
 
-        for template_value in profile["templates"]:
+        for template_value in selected_templates(profile, mode):
             source = relative_skill_path(template_value)
             if source.parent.name == "templates":
                 target = output / "working" / source.name
@@ -222,6 +256,7 @@ def initialize_case(
 
         manifest = {
             "schema_version": 1,
+            "profile_schema_version": profile["schema_version"],
             "created_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
             "profile_id": profile_id,
             "jurisdiction": profile["jurisdiction"],
@@ -230,6 +265,17 @@ def initialize_case(
             "document_language": language,
             "filing_context": filing_context,
             "profile_sha256": sha256_file(profile_path),
+            "reference_files": [
+                {
+                    "path": value,
+                    "sha256": sha256_file(relative_skill_path(value)),
+                }
+                for value in (
+                    profile["profile_reference"],
+                    *profile["common_references"],
+                    *profile["jurisdiction_references"],
+                )
+            ],
             "foundation_status": profile["foundation_status"],
             "source_files": source_manifest,
             "source_handling": "hashed in place; not copied or modified",

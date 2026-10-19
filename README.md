@@ -1,7 +1,7 @@
 # patent-skills
 
-Agent skills for drafting, reviewing, examining, and pressure-testing patent
-applications.
+Agent skills for drafting, reviewing, examining, and reviewing patent
+applications [USPTO, ROSPATENT].
 
 ## Skills
 

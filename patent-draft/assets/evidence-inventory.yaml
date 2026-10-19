@@ -1,0 +1,12 @@
+# One entry per source of drafting facts. Preserve the original file or statement.
+
+evidence:
+  - evidence_id: E-001
+    kind: null                   # document | drawing | test | inventor_statement | other
+    source: null                 # path, document label, or statement provenance
+    sha256: null                 # populated for files by init_case.py
+    supplied_by: null
+    supplied_at: null
+    confidentiality: null       # confidential | public | unknown
+    supports: []
+    notes: null

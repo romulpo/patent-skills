@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patent-draft:profile-schema:v1",
+  "title": "Patent drafting profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile_id",
+    "jurisdiction",
+    "application_kind",
+    "default_language",
+    "allowed_languages",
+    "drafting_modes",
+    "filing_contexts",
+    "profile_reference",
+    "common_references",
+    "templates",
+    "foundation_status"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "profile_id": {"enum": ["us-utility", "ru-invention", "ru-utility-model"]},
+    "jurisdiction": {"enum": ["us", "ru"]},
+    "application_kind": {"enum": ["utility", "invention", "utility_model"]},
+    "default_language": {"enum": ["en", "ru"]},
+    "allowed_languages": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"enum": ["en", "ru"]}
+    },
+    "drafting_modes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"enum": ["new_draft", "revise", "translate_adapt"]}
+    },
+    "filing_contexts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"enum": ["pre_filing", "filed_pending"]}
+    },
+    "profile_reference": {"type": "string", "minLength": 1},
+    "common_references": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "templates": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "foundation_status": {"enum": ["foundation_only", "drafting_ready"]}
+  }
+}

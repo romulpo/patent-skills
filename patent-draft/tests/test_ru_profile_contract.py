@@ -49,7 +49,13 @@ class RussianProfileContractTests(unittest.TestCase):
 
     def test_us_profile_does_not_load_ru_sources(self):
         profile, _ = init_case.load_profile("us-utility")
-        self.assertEqual([], profile["jurisdiction_references"])
+        self.assertTrue(profile["jurisdiction_references"])
+        self.assertTrue(
+            all(
+                reference.startswith("references/us/")
+                for reference in profile["jurisdiction_references"]
+            )
+        )
         self.assertEqual({}, profile["mode_templates"])
 
 

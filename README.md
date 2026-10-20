@@ -14,15 +14,16 @@ applications [USPTO, ROSPATENT].
 
 `patent-draft` requires one explicit profile:
 
-- `us-utility` — shared drafting foundation; substantive US drafting rules are not
-  yet included;
+- `us-utility` — source-mapped U.S. utility drafting, including specification,
+  claims, § 112 support, abstract/drawings coordination, and software/AI guidance;
 - `ru-invention` — source-mapped Rospatent invention drafting;
 - `ru-utility-model` — source-mapped Rospatent utility-model drafting.
 
-The Russian profiles separate normative requirements, Rospatent practice,
-translation conventions, drafting guidance, house style, and rules that still need
-verification. They include dedicated description, claims, abstract, rule-check, and
-EN-to-RU review templates. External source files are hashed, not copied or modified.
+The jurisdiction profiles separate law, office practice, drafting guidance, house
+style, and rules that still need verification. Each drafting-ready profile includes
+dedicated description, claims, abstract, and rule-check templates; the Russian
+profiles also include EN-to-RU review. User-supplied evidence is hashed in place,
+and external authority text is cited rather than copied into the repository.
 
 ## Start a drafting case
 
@@ -36,8 +37,9 @@ python patent-draft/scripts/init_case.py \
   --output case-dir
 ```
 
-Modes: `new_draft`, `revise`, and `translate_adapt`. Russian outputs include a
-filing-facing source-verification gate because laws and office practice change.
+Modes: `new_draft`, `revise`, and `translate_adapt` where supported. U.S. and
+Russian outputs include a filing-facing source-verification gate because laws and
+office practice change.
 
 ## Install
 

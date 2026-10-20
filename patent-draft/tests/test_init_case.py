@@ -18,7 +18,7 @@ SPEC.loader.exec_module(init_case)
 class InitCaseTests(unittest.TestCase):
     def test_all_profiles_resolve_references_and_templates(self):
         expected_status = {
-            "us-utility": "foundation_only",
+            "us-utility": "drafting_ready",
             "ru-invention": "drafting_ready",
             "ru-utility-model": "drafting_ready",
         }

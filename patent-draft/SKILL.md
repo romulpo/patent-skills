@@ -30,10 +30,11 @@ Then read only the selected profile:
 - [references/profiles/ru-invention.md](references/profiles/ru-invention.md)
 - [references/profiles/ru-utility-model.md](references/profiles/ru-utility-model.md)
 
-For either Russian profile, use only the RU references routed by that profile.
-Treat their authority labels as part of the rule: a local drafting or translation
-convention is not a statement of law. Before any filing-facing handoff, confirm the
-current official text as required by the RU source manifest; this skill does not file.
+Use only the jurisdiction references routed by the selected profile. Treat their
+authority labels as part of the rule: USPTO or Rospatent practice guidance, a local
+translation convention, and a drafting recommendation are not statements of law.
+Before any filing-facing handoff, confirm current official text as required by the
+selected source manifest; this skill does not file.
 
 ## Initialize the case
 

@@ -14,7 +14,13 @@
     "references/common/claim-first-method.md",
     "references/common/deliverable-contract.md"
   ],
-  "jurisdiction_references": [],
+  "jurisdiction_references": [
+    "references/us/source-manifest.md",
+    "references/us/authority-and-verification.md",
+    "references/us/specification-drafting.md",
+    "references/us/claim-drafting.md",
+    "references/us/software-ai-drafting.md"
+  ],
   "templates": [
     "assets/intake-common.yaml",
     "assets/evidence-inventory.yaml",
@@ -23,8 +29,12 @@
     "assets/templates/support-map.md",
     "assets/templates/terminology-map.md",
     "assets/templates/drawings-brief.md",
-    "assets/templates/unresolved-decisions.md"
+    "assets/templates/unresolved-decisions.md",
+    "assets/templates/us-utility-description.md",
+    "assets/templates/us-utility-claims.md",
+    "assets/templates/us-abstract.md",
+    "assets/templates/us-rule-check.md"
   ],
   "mode_templates": {},
-  "foundation_status": "foundation_only"
+  "foundation_status": "drafting_ready"
 }

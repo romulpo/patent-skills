@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "ru-invention-it-group",
+      "profile_id": "ru-invention",
+      "mode": "new_draft",
+      "language": "ru",
+      "filing_context": "pre_filing",
+      "request_path": "cases/ru-invention-it-group/request.md",
+      "source_paths": ["cases/ru-invention-it-group/disclosure.md"],
+      "scenario_tags": ["claim_architecture", "it_ai", "unity", "support_mapping"],
+      "expected_disposition": "draft_packet",
+      "required_observations": [
+        {
+          "id": "separate-families",
+          "criterion": "The claim plan evaluates system, method, and machine-readable-medium families separately rather than merging their categories."
+        },
+        {
+          "id": "unity-basis",
+          "criterion": "Any multi-family plan states a supported common or corresponding special technical feature and leaves unity unresolved if that basis is insufficient."
+        },
+        {
+          "id": "causal-chain",
+          "criterion": "The technical result is tied to the disclosed offset correction and timestamp adjustment through an explicit causal chain."
+        },
+        {
+          "id": "supported-values",
+          "criterion": "The packet preserves the disclosed timing values and maps claimed limitations to source locations."
+        }
+      ],
+      "forbidden_outcomes": [
+        "Adds an undisclosed accuracy measurement, training procedure, protocol, or performance test.",
+        "Adds a machine-readable-medium claim merely because the subject involves software, without mapping its disclosed support."
+      ]
+    },
+    {
+      "id": "ru-utility-model-device",
+      "profile_id": "ru-utility-model",
+      "mode": "new_draft",
+      "language": "ru",
+      "filing_context": "pre_filing",
+      "request_path": "cases/ru-utility-model-device/request.md",
+      "source_paths": ["cases/ru-utility-model-device/disclosure.md"],
+      "scenario_tags": ["claim_architecture", "device_only", "alternatives", "drawings"],
+      "expected_disposition": "draft_packet",
+      "required_observations": [
+        {
+          "id": "one-independent",
+          "criterion": "The claims contain exactly one independent device claim and any additional claims are dependent."
+        },
+        {
+          "id": "static-device",
+          "criterion": "The independent claim characterizes the housing, slider, spring, window, and their relationships in a static device state."
+        },
+        {
+          "id": "material-fallbacks",
+          "criterion": "Polycarbonate and glass are handled as supported particular implementations without an A-or-B essential limitation in the independent claim."
+        },
+        {
+          "id": "numeral-map",
+          "criterion": "Reference numerals remain consistent with the supplied figure list."
+        }
+      ],
+      "forbidden_outcomes": [
+        "Creates a second independent claim for another window material.",
+        "Claims the operating sequence as a method or replaces the disclosed structure with result-only language."
+      ]
+    },
+    {
+      "id": "ru-utility-model-method-mismatch",
+      "profile_id": "ru-utility-model",
+      "mode": "new_draft",
+      "language": "ru",
+      "filing_context": "pre_filing",
+      "request_path": "cases/ru-utility-model-method-mismatch/request.md",
+      "source_paths": ["cases/ru-utility-model-method-mismatch/disclosure.md"],
+      "scenario_tags": ["object_routing", "device_only", "no_fabrication"],
+      "expected_disposition": "blocked_for_input",
+      "required_observations": [
+        {
+          "id": "profile-mismatch",
+          "criterion": "The packet identifies that the authentic subject is a method and cannot be drafted as a Russian utility model from the supplied evidence."
+        },
+        {
+          "id": "explicit-choice",
+          "criterion": "The unresolved decisions ask whether to switch explicitly to ru-invention or supply a real device architecture."
+        },
+        {
+          "id": "evidence-preserved",
+          "criterion": "The supplied method remains inventor evidence and is not silently discarded or rewritten as hardware."
+        }
+      ],
+      "forbidden_outcomes": [
+        "Invents processors, modules, sensors, storage, or structural connections to manufacture a device claim.",
+        "Silently changes the selected profile to ru-invention."
+      ]
+    },
+    {
+      "id": "ru-translation-integrity",
+      "profile_id": "ru-invention",
+      "mode": "translate_adapt",
+      "language": "ru",
+      "filing_context": "pre_filing",
+      "request_path": "cases/ru-translation-integrity/request.md",
+      "source_paths": [
+        "cases/ru-translation-integrity/source-en.md",
+        "cases/ru-translation-integrity/target-ru.md"
+      ],
+      "scenario_tags": ["translation_integrity", "numbers", "terminology", "claim_category"],
+      "expected_disposition": "review_packet",
+      "required_observations": [
+        {
+          "id": "numeric-errors",
+          "criterion": "The review identifies all planted changes: 25±2 to 25±5 ms, 0.85 to 0.58, three sensors to four, and numeral 14 to 41."
+        },
+        {
+          "id": "category-error",
+          "criterion": "The review identifies that the source method was mistranslated as a system and preserves the method category in the corrected Russian version."
+        },
+        {
+          "id": "change-log",
+          "criterion": "Each substantive correction records source location, target location, reason, support, and scope effect."
+        }
+      ],
+      "forbidden_outcomes": [
+        "Treats a changed number or reference numeral as editorial only.",
+        "Adds technical detail not present in either supplied document."
+      ]
+    },
+    {
+      "id": "ru-incomplete-disclosure",
+      "profile_id": "ru-invention",
+      "mode": "new_draft",
+      "language": "ru",
+      "filing_context": "pre_filing",
+      "request_path": "cases/ru-incomplete-disclosure/request.md",
+      "source_paths": ["cases/ru-incomplete-disclosure/disclosure.md"],
+      "scenario_tags": ["no_fabrication", "enablement", "technical_result", "support_mapping"],
+      "expected_disposition": "blocked_for_input",
+      "required_observations": [
+        {
+          "id": "unsupported-prediction",
+          "criterion": "The 30-day prediction statement and 95 percent accuracy statement are classified as unsupported requests rather than technical facts."
+        },
+        {
+          "id": "missing-mechanism",
+          "criterion": "The packet asks for the model, input features, training or inference procedure, failure definition, and evidence for the asserted result."
+        },
+        {
+          "id": "supported-boundary",
+          "criterion": "Only the supplied sensor collection and server storage functions are treated as confirmed technical matter."
+        }
+      ],
+      "forbidden_outcomes": [
+        "Invents a neural-network architecture, dataset, threshold, validation experiment, or causal explanation.",
+        "Produces a clean broad prediction claim despite the missing mechanism and support."
+      ]
+    },
+    {
+      "id": "ru-filed-pending-new-matter",
+      "profile_id": "ru-invention",
+      "mode": "revise",
+      "language": "ru",
+      "filing_context": "filed_pending",
+      "request_path": "cases/ru-filed-pending-new-matter/request.md",
+      "source_paths": [
+        "cases/ru-filed-pending-new-matter/as-filed.md",
+        "cases/ru-filed-pending-new-matter/change-request.md"
+      ],
+      "scenario_tags": ["filed_pending", "new_matter", "support_mapping", "revision"],
+      "expected_disposition": "review_packet",
+      "required_observations": [
+        {
+          "id": "no-support",
+          "criterion": "The proposed dual-antenna diversity feature is identified as lacking exact as-filed support."
+        },
+        {
+          "id": "no-clean-addition",
+          "criterion": "The unsupported feature is excluded from the clean revised claims and remains in unresolved decisions or the change log."
+        },
+        {
+          "id": "supported-editing",
+          "criterion": "Any clean revision remains within the disclosed single-antenna controller, sensor, and alarm arrangement."
+        }
+      ],
+      "forbidden_outcomes": [
+        "Treats the later prototype or business request as as-filed support.",
+        "Backfills a dual-antenna embodiment into the description."
+      ]
+    }
+  ]
+}

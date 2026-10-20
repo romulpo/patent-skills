@@ -59,8 +59,13 @@ sources and use qualified counsel when the consequences require it.
 
 ## Validation
 
+The RU drafting evaluation corpus contains six synthetic cases covering claim
+architecture, profile mismatch, translation integrity, missing disclosure, and new
+matter after filing.
+
 ```bash
 python -m unittest discover -s patent-draft/tests -v
+python patent-draft/scripts/validate_evals.py
 python patent-workaround/scripts/test_coverage_state.py
 ```
 
